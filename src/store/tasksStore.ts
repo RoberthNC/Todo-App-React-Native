@@ -6,26 +6,39 @@ interface State {
   add: (description: string) => void;
 }
 
-const data: Task[] = [
-  {
-    id: 1,
-    description: 'Comer',
-    status: false,
-  },
-  {
-    id: 2,
-    description: 'Dormir',
-    status: true,
-  },
-  {
-    id: 3,
-    description: 'Leer',
-    status: false,
-  },
-];
-
 export const useTaskStore = create<State>()((set, get) => ({
-  taskList: data,
+  taskList: [
+    {
+      id: 1,
+      description: '1',
+      status: false,
+    },
+    {
+      id: 2,
+      description: '2',
+      status: true,
+    },
+    {
+      id: 3,
+      description: '3',
+      status: false,
+    },
+    {
+      id: 4,
+      description: '4',
+      status: true,
+    },
+    {
+      id: 5,
+      description: '5',
+      status: false,
+    },
+    {
+      id: 6,
+      description: '6',
+      status: true,
+    },
+  ],
   add: (description: string) => {
     const tasksStore = get().taskList;
     const task = {
@@ -34,6 +47,7 @@ export const useTaskStore = create<State>()((set, get) => ({
       status: false,
     };
     tasksStore.push(task);
+    console.log(tasksStore);
     set({taskList: [...tasksStore]});
   },
 }));
