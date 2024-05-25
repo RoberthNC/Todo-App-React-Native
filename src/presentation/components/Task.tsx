@@ -3,7 +3,7 @@ import Ion from 'react-native-vector-icons/Ionicons';
 import {colors, globalStyles} from '../../config/theme/app-theme';
 
 interface Props {
-  id: string;
+  id: number;
   description: string;
   status: boolean;
 }

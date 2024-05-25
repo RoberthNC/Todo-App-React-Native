@@ -1,11 +1,26 @@
 import {View, TextInput, Pressable, Text} from 'react-native';
 import {globalStyles} from '../../config/theme/app-theme';
+import {useState} from 'react';
+import {useTaskStore} from '../../store/tasksStore';
 
 export const FormTask = () => {
+  const [description, setDescription] = useState<string>('');
+  const add = useTaskStore(state => state.add);
+
+  const createTask = () => {
+    add(description);
+    setDescription('');
+  };
+
   return (
     <View style={globalStyles.containerForm}>
-      <TextInput style={globalStyles.inputTask} />
+      <TextInput
+        onChangeText={setDescription}
+        style={globalStyles.inputTask}
+        value={description}
+      />
       <Pressable
+        onPress={createTask}
         style={({pressed}) => [
           {
             ...globalStyles.submitButton,

@@ -3,21 +3,22 @@ import {Task} from '../interfaces';
 
 interface State {
   taskList: Task[];
+  add: (description: string) => void;
 }
 
 const data: Task[] = [
   {
-    id: 'e4eaaaf2-d142-11e1-b3e4-080027620cdd',
+    id: 1,
     description: 'Comer',
     status: false,
   },
   {
-    id: '109156be-c4fb-41ea-b1b4-efe1671c5836',
+    id: 2,
     description: 'Dormir',
     status: true,
   },
   {
-    id: '3d3c68b5-071d-4fb3-b4ed-29b2b0a21e54',
+    id: 3,
     description: 'Leer',
     status: false,
   },
@@ -25,4 +26,14 @@ const data: Task[] = [
 
 export const useTaskStore = create<State>()((set, get) => ({
   taskList: data,
+  add: (description: string) => {
+    const tasksStore = get().taskList;
+    const task = {
+      id: ++tasksStore.length,
+      description: description,
+      status: false,
+    };
+    tasksStore.push(task);
+    set({taskList: [...tasksStore]});
+  },
 }));

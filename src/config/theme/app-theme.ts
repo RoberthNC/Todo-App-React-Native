@@ -50,12 +50,11 @@ export const globalStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 15,
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
   containerTaskList: {
-    display: 'flex',
-    gap: 15,
     marginTop: 30,
   },
   deleteTask: {
