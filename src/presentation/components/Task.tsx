@@ -1,6 +1,6 @@
 import {View, Pressable, Text} from 'react-native';
 import Ion from 'react-native-vector-icons/Ionicons';
-import {globalStyles} from '../../config/theme/app-theme';
+import {colors, globalStyles} from '../../config/theme/app-theme';
 
 interface Props {
   id: string;
@@ -14,8 +14,11 @@ export const Task = ({id, description, status}: Props) => {
       <View style={globalStyles.leftContainer}>
         <Pressable>
           <Ion
-            style={globalStyles.statusIcon}
-            name={'reload-outline'}
+            style={{
+              ...globalStyles.statusIcon,
+              backgroundColor: status ? colors.yellow : colors.green,
+            }}
+            name={status ? 'checkmark-outline' : 'reload-outline'}
             size={30}
           />
         </Pressable>

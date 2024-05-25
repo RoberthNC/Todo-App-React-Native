@@ -13,7 +13,7 @@ export const FormTask = () => {
             opacity: pressed ? 0.8 : 1,
           },
         ]}>
-        <Text>Add New</Text>
+        <Text style={globalStyles.addButtonText}>Add New</Text>
       </Pressable>
     </View>
   );

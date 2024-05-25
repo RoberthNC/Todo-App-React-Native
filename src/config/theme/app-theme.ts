@@ -12,6 +12,9 @@ export const colors = {
 };
 
 export const globalStyles = StyleSheet.create({
+  addButtonText: {
+    fontSize: 20,
+  },
   buttonText: {
     borderRadius: 20,
     borderWidth: 3,
@@ -58,11 +61,13 @@ export const globalStyles = StyleSheet.create({
   deleteTask: {
     backgroundColor: colors.orange,
     borderRadius: 100,
+    color: 'white',
     padding: 10,
     width: 50,
   },
   inputTask: {
     backgroundColor: colors.darkPurple,
+    fontSize: 20,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 20,
@@ -74,17 +79,18 @@ export const globalStyles = StyleSheet.create({
     gap: 10,
   },
   statusIcon: {
-    backgroundColor: 'black',
     borderRadius: 100,
+    color: 'white',
     padding: 10,
     width: 50,
   },
   submitButton: {
     backgroundColor: colors.pink,
     borderRadius: 20,
+    textAlign: 'center',
     paddingHorizontal: 15,
     paddingVertical: 10,
-    width: 90,
+    width: 110,
   },
   submitButtonText: {
     fontSize: 20,
