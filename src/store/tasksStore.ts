@@ -1,43 +1,39 @@
 import {create} from 'zustand';
 import {Task} from '../interfaces';
+import {Filter} from '../enums';
 
 interface State {
+  filter: Filter;
+  filteredTaskList: Task[];
   taskList: Task[];
   add: (description: string) => void;
   update: (id: number) => void;
   delete: (id: number) => void;
+  filterTasks: (filter: Filter) => void;
 }
 
 export const useTaskStore = create<State>()((set, get) => ({
+  filter: Filter.all,
+  filteredTaskList: [],
   taskList: [
     {
       id: 1,
-      description: '1',
+      description: 'Almorzar',
       status: false,
     },
     {
       id: 2,
-      description: '2',
+      description: 'Desayunar',
       status: true,
     },
     {
       id: 3,
-      description: '3',
+      description: 'Estudiar',
       status: false,
     },
     {
       id: 4,
-      description: '4',
-      status: true,
-    },
-    {
-      id: 5,
-      description: '5',
-      status: false,
-    },
-    {
-      id: 6,
-      description: '6',
+      description: 'Dormir',
       status: true,
     },
   ],
@@ -65,5 +61,23 @@ export const useTaskStore = create<State>()((set, get) => ({
     const tasks = get().taskList;
     const updatedTasks = tasks.filter(task => task.id !== id);
     set({taskList: [...updatedTasks]});
+  },
+  filterTasks: (filter: Filter) => {
+    let filterTasks;
+    const tasks = get().taskList;
+    set({filter: filter});
+    switch (filter) {
+      case 'all':
+        set({filteredTaskList: tasks});
+        break;
+      case 'active':
+        filterTasks = tasks.filter(task => task.status === false);
+        set({filteredTaskList: filterTasks});
+        break;
+      case 'done':
+        filterTasks = tasks.filter(task => task.status === true);
+        set({filteredTaskList: filterTasks});
+        break;
+    }
   },
 }));
