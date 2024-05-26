@@ -6,6 +6,7 @@ interface State {
   filter: Filter;
   filteredTaskList: Task[];
   taskList: Task[];
+  load: () => void;
   add: (description: string) => void;
   update: (id: number) => void;
   delete: (id: number) => void;
@@ -37,6 +38,10 @@ export const useTaskStore = create<State>()((set, get) => ({
       status: true,
     },
   ],
+  load: () => {
+    const tasks = get().taskList;
+    set({filteredTaskList: [...tasks]});
+  },
   add: (description: string) => {
     const tasks = get().taskList;
     const task = {
@@ -56,11 +61,13 @@ export const useTaskStore = create<State>()((set, get) => ({
       }
     });
     set({taskList: [...updatedTasks]});
+    get().load();
   },
   delete: (id: number) => {
     const tasks = get().taskList;
     const updatedTasks = tasks.filter(task => task.id !== id);
     set({taskList: [...updatedTasks]});
+    get().load();
   },
   filterTasks: (filter: Filter) => {
     let filterTasks;

@@ -6,9 +6,11 @@ import {useTaskStore} from '../../store/tasksStore';
 export const FormTask = () => {
   const [description, setDescription] = useState<string>('');
   const add = useTaskStore(state => state.add);
+  const load = useTaskStore(state => state.load);
 
   const createTask = () => {
     add(description);
+    load();
     setDescription('');
   };
 

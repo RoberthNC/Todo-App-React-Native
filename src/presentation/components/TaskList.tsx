@@ -1,14 +1,19 @@
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {Task} from './';
 import {useTaskStore} from '../../store/tasksStore';
+import {useEffect} from 'react';
 
 export const TaskList = () => {
-  const taskList = useTaskStore(state => state.taskList);
+  const load = useTaskStore(state => state.load);
   const filteredTaskList = useTaskStore(state => state.filteredTaskList);
-  const filter = useTaskStore(state => state.filter);
+
+  useEffect(() => {
+    load();
+  }, []);
+
   return (
     <View>
-      {taskList.map(({id, description, status}) => (
+      {filteredTaskList.map(({id, description, status}) => (
         <Task key={id} id={id} description={description} status={status} />
       ))}
     </View>
