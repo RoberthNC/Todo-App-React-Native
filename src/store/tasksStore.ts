@@ -41,17 +41,14 @@ export const useTaskStore = create<State>()((set, get) => ({
       status: true,
     },
   ],
-  // TODO: Fix issue inside of add method
   add: (description: string) => {
     const tasks = get().taskList;
     const task = {
-      id: ++tasks.length,
+      id: tasks[tasks.length - 1].id + 1,
       description: description,
       status: false,
     };
-    tasks.push(task);
-    console.log('Task Store: ', tasks);
-    set({taskList: [...tasks]});
+    set({taskList: [...tasks, task]});
   },
   update: (id: number) => {
     const tasks = get().taskList;
