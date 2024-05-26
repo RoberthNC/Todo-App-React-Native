@@ -4,6 +4,8 @@ import {Task} from '../interfaces';
 interface State {
   taskList: Task[];
   add: (description: string) => void;
+  update: (id: number) => void;
+  delete: (id: number) => void;
 }
 
 export const useTaskStore = create<State>()((set, get) => ({
@@ -39,15 +41,32 @@ export const useTaskStore = create<State>()((set, get) => ({
       status: true,
     },
   ],
+  // TODO: Fix issue inside of add method
   add: (description: string) => {
-    const tasksStore = get().taskList;
+    const tasks = get().taskList;
     const task = {
-      id: ++tasksStore.length,
+      id: ++tasks.length,
       description: description,
       status: false,
     };
-    tasksStore.push(task);
-    console.log(tasksStore);
-    set({taskList: [...tasksStore]});
+    tasks.push(task);
+    console.log('Task Store: ', tasks);
+    set({taskList: [...tasks]});
+  },
+  update: (id: number) => {
+    const tasks = get().taskList;
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+        return {...task, status: !task.status};
+      } else {
+        return task;
+      }
+    });
+    set({taskList: [...updatedTasks]});
+  },
+  delete: (id: number) => {
+    const tasks = get().taskList;
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    set({taskList: [...updatedTasks]});
   },
 }));

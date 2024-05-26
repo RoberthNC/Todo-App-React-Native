@@ -1,6 +1,7 @@
 import {View, Pressable, Text} from 'react-native';
 import Ion from 'react-native-vector-icons/Ionicons';
 import {colors, globalStyles} from '../../config/theme/app-theme';
+import {useTaskStore} from '../../store/tasksStore';
 
 interface Props {
   id: number;
@@ -9,10 +10,19 @@ interface Props {
 }
 
 export const Task = ({id, description, status}: Props) => {
+  const updateTask = useTaskStore(state => state.update);
+  const deleteTask = useTaskStore(state => state.delete);
+
   return (
     <View style={globalStyles.containerTask}>
       <View style={globalStyles.leftContainer}>
-        <Pressable>
+        <Pressable
+          onPress={() => updateTask(id)}
+          style={({pressed}) => [
+            {
+              opacity: pressed ? 0.8 : 1,
+            },
+          ]}>
           <Ion
             style={{
               ...globalStyles.statusIcon,
@@ -29,7 +39,13 @@ export const Task = ({id, description, status}: Props) => {
           {description}
         </Text>
       </View>
-      <Pressable>
+      <Pressable
+        style={({pressed}) => [
+          {
+            opacity: pressed ? 0.8 : 1,
+          },
+        ]}
+        onPress={() => deleteTask(id)}>
         <Ion style={globalStyles.deleteTask} name={'trash-outline'} size={30} />
       </Pressable>
     </View>
