@@ -1,7 +1,7 @@
+import {useEffect} from 'react';
 import {View} from 'react-native';
 import {Task} from './';
 import {useTaskStore} from '../../store/tasksStore';
-import {useEffect} from 'react';
 
 export const TaskList = () => {
   const load = useTaskStore(state => state.load);

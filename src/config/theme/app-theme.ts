@@ -64,6 +64,11 @@ export const globalStyles = StyleSheet.create({
     padding: 10,
     width: 50,
   },
+  errorMessage: {
+    color: colors.white,
+    fontWeight: '700',
+    width: 100,
+  },
   inputTask: {
     backgroundColor: colors.darkPurple,
     fontSize: 20,
